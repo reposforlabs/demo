@@ -2,6 +2,7 @@
 az group create --name terraform-rg --location eastus
 
 # Run Terraform container (will pull from Docker Hub)
+# Recreate with an infinite wait command
 az container create `
   --resource-group terraform-rg `
   --name terraform-shell `
@@ -10,4 +11,7 @@ az container create `
   --cpu 1 `
   --memory 1.5 `
   --restart-policy OnFailure `
-  --command-line "/bin/sh"
+  --command-line "tail -f /dev/null"  # Keeps container running
+
+# Then attach
+az container attach --resource-group terraform-rg --name terraform-shell
