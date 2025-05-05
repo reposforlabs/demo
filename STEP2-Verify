@@ -1,3 +1,0 @@
-az container show `
-  --resource-group terraform-rg `
-  --name terraform-shell
